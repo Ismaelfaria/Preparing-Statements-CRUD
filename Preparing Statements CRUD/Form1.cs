@@ -96,6 +96,7 @@ namespace Preparing_Statements_CRUD
                 conn.Open();
 
                 var commSelect = new MySqlCommand();
+
                 commSelect.Connection = conn;
 
                 commSelect.CommandText = "SELECT * FROM contato WHERE nome LIKE @q OR email LIKE @q ";
