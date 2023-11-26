@@ -115,7 +115,6 @@ namespace Preparing_Statements_CRUD
                         reader.GetString(2),
                         reader.GetString(3),
                     };
-
                     var linha_listView = new ListViewItem(row);
 
                     listContatos.Items.Add(linha_listView);
