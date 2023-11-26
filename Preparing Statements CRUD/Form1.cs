@@ -14,6 +14,19 @@ namespace Preparing_Statements_CRUD
         public Form1()
         {
             InitializeComponent();
+
+            listContatos.View = View.Details;
+            listContatos.LabelEdit = true;
+            listContatos.AllowColumnReorder = true;
+            listContatos.FullRowSelect = true;
+            listContatos.GridLines = true;
+
+            listContatos.Columns.Add("ID", 30, HorizontalAlignment.Left);
+            listContatos.Columns.Add("Nome", 150, HorizontalAlignment.Left);
+            listContatos.Columns.Add("E-mail", 150, HorizontalAlignment.Left);
+            listContatos.Columns.Add("Telefone", 150, HorizontalAlignment.Left);
+
+            carregarContatos();
         }
 
         private void Salvar_Click(object sender, EventArgs e)
@@ -32,7 +45,7 @@ namespace Preparing_Statements_CRUD
 
                     comInsert.Connection = conn;
 
-                    comInsert.CommandText = "INSERT INTO contato (nome, email, telefone) "+
+                    comInsert.CommandText = "INSERT INTO contato (nome, email, telefone) " +
                         "VALUES (@nome, @email, @telefone) ";
 
                     comInsert.Parameters.AddWithValue("@nome", txtNome.Text);
@@ -44,6 +57,12 @@ namespace Preparing_Statements_CRUD
                     comInsert.ExecuteNonQuery();
 
                     MessageBox.Show("Deu tudo certo, contato adicionado!!");
+
+                    txtNome.Text = string.Empty;
+                    txtEmail.Text = "";
+                    txtTelefone.Text = "";
+
+                    carregarContatos();
                 }
                 catch (MySqlException ex)
                 {
@@ -68,7 +87,7 @@ namespace Preparing_Statements_CRUD
         {
 
         }
-                                                                                                                                                                                                                                                                                                                            
+
         private void Buscar_Click(object sender, EventArgs e)
         {
             try
@@ -81,7 +100,48 @@ namespace Preparing_Statements_CRUD
 
                 commSelect.CommandText = "SELECT * FROM contato WHERE nome LIKE @q OR email LIKE @q ";
 
-                commSelect.Parameters.AddWithValue("@q", "%" + txtBuscar + "%");
+                commSelect.Parameters.AddWithValue("@q", "%" + txtBuscar.Text + "%");
+
+                MySqlDataReader reader = commSelect.ExecuteReader();
+
+                listContatos.Items.Clear();
+
+                while (reader.Read())
+                {
+                    string[] row =
+                    {
+                        reader.GetString(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                    };
+
+                    var linha_listView = new ListViewItem(row);
+
+                    listContatos.Items.Add(linha_listView);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void carregarContatos()
+        {
+            try
+            {
+                conn = new MySqlConnection(sql);
+                conn.Open();
+
+                var commSelect = new MySqlCommand();
+                commSelect.Connection = conn;
+
+                commSelect.CommandText = "SELECT * FROM contato ORDER BY id DESC ";
 
                 MySqlDataReader reader = commSelect.ExecuteReader();
 
