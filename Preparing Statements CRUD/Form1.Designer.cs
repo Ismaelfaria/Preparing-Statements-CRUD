@@ -35,6 +35,10 @@
             this.txtTelefone = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.Salvar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.listContatos = new System.Windows.Forms.ListView();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.Buscar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -95,11 +99,51 @@
             this.Salvar.UseVisualStyleBackColor = true;
             this.Salvar.Click += new System.EventHandler(this.Salvar_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(167, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "buscar contatos";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // listContatos
+            // 
+            this.listContatos.HideSelection = false;
+            this.listContatos.Location = new System.Drawing.Point(170, 61);
+            this.listContatos.Name = "listContatos";
+            this.listContatos.Size = new System.Drawing.Size(347, 119);
+            this.listContatos.TabIndex = 8;
+            this.listContatos.UseCompatibleStateImageBehavior = false;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Location = new System.Drawing.Point(170, 35);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(252, 20);
+            this.txtBuscar.TabIndex = 9;
+            // 
+            // Buscar
+            // 
+            this.Buscar.Location = new System.Drawing.Point(428, 30);
+            this.Buscar.Name = "Buscar";
+            this.Buscar.Size = new System.Drawing.Size(88, 26);
+            this.Buscar.TabIndex = 10;
+            this.Buscar.Text = "Buscar";
+            this.Buscar.UseVisualStyleBackColor = true;
+            this.Buscar.Click += new System.EventHandler(this.Buscar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(127, 192);
+            this.ClientSize = new System.Drawing.Size(529, 192);
+            this.Controls.Add(this.Buscar);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.listContatos);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.Salvar);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtTelefone);
@@ -123,6 +167,10 @@
         private System.Windows.Forms.TextBox txtTelefone;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Button Salvar;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView listContatos;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Button Buscar;
     }
 }
 

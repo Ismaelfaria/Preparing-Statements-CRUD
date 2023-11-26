@@ -63,5 +63,53 @@ namespace Preparing_Statements_CRUD
                 MessageBox.Show("Verifique se preencheu todos os campos.", "Error", MessageBoxButtons.OK);
             }
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+                                                                                                                                                                                                                                                                                                                            
+        private void Buscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conn = new MySqlConnection(sql);
+                conn.Open();
+
+                var commSelect = new MySqlCommand();
+                commSelect.Connection = conn;
+
+                commSelect.CommandText = "SELECT * FROM contato WHERE nome LIKE @q OR email LIKE @q ";
+
+                commSelect.Parameters.AddWithValue("@q", "%" + txtBuscar + "%");
+
+                MySqlDataReader reader = commSelect.ExecuteReader();
+
+                listContatos.Items.Clear();
+
+                while (reader.Read())
+                {
+                    string[] row =
+                    {
+                        reader.GetString(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                    };
+
+                    var linha_listView = new ListViewItem(row);
+
+                    listContatos.Items.Add(linha_listView);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
